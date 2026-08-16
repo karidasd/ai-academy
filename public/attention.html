@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformer Attention Matrix Lab — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="logo"><a href="index.html"><h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1></a></div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Curriculum</a>
+            <a href="playground.html" class="nav-link">🧠 Neural Sandbox</a>
+            <a href="attention.html" class="nav-link active">🌌 Attention Matrix</a>
+            <a href="calculator.html" class="nav-link">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link">🤖 AI Prompts</a>
+            <a href="certificate.html" class="nav-link">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+            <div class="progress-badge"><div class="bar"><div class="bar-fill" id="globalProgressBar"></div></div><span id="globalProgressText">0%</span></div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">MULTI-HEAD ATTENTION HEATMAP</span>
+            <h1 class="hero-title">Self-Attention <span class="glow">Weight Matrix Lab</span></h1>
+            <p class="hero-desc">Type any sentence to compute token-to-token Query-Key dot products and visualize the resulting Softmax attention weight heatmaps across attention heads.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1100px;">
+        <div style="display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px;">
+                <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">📝 Input Sequence</h3>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">SENTENCE TO ANALYZE</label>
+                    <input type="text" id="seqInput" value="The animal didn't cross the street because it was tired" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">ATTENTION HEAD</label>
+                    <select id="headSelect" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                        <option value="0">Head 1: Syntactic Subject Resolution</option>
+                        <option value="1">Head 2: Coreference ('it' -> 'animal')</option>
+                        <option value="2">Head 3: Positional Adjacent Lookback</option>
+                    </select>
+                </div>
+                <button id="calcAttnBtn" class="btn btn-primary" style="width: 100%;">⚡ Compute Attention Matrix</button>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px; overflow-x: auto;">
+                <h4 style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">📊 Token-to-Token Attention Heatmap [Softmax(QK^T / √d_k)]</h4>
+                <div id="attnMatrixTable"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+    <script>
+        function computeAttention() {
+            const text = document.getElementById('seqInput').value || "The model learns";
+            const tokens = text.split(/\s+/).filter(t => t.length > 0).slice(0, 8);
+            const head = parseInt(document.getElementById('headSelect').value);
+
+            let html = '<table class="calendar-table" style="text-align:center;"><thead><tr><th>Q \\ K</th>';
+            tokens.forEach(t => { html += `<th style="color:var(--accent);">${t}</th>`; });
+            html += '</tr></thead><tbody>';
+
+            tokens.forEach((q, i) => {
+                html += `<tr><td style="font-weight:bold; color:var(--text-primary);">${q}</td>`;
+                tokens.forEach((k, j) => {
+                    let weight = 0.05;
+                    if (head === 1 && (q.toLowerCase() === 'it' && k.toLowerCase() === 'animal')) weight = 0.88;
+                    else if (head === 2 && (i === j + 1)) weight = 0.72;
+                    else if (i === j) weight = 0.55;
+                    else weight = Math.random() * 0.25;
+
+                    let bg = `rgba(168, 85, 247, ${weight})`;
+                    html += `<td style="background:${bg}; font-family:'JetBrains Mono'; font-size:11.5px; font-weight:${weight > 0.5 ? 'bold' : 'normal'}; color:${weight > 0.4 ? '#FFF' : 'var(--text-muted)'};">${weight.toFixed(2)}</td>`;
+                });
+                html += '</tr>';
+            });
+            html += '</tbody></table>';
+
+            document.getElementById('attnMatrixTable').innerHTML = html;
+            playSound('ai');
+        }
+
+        document.getElementById('calcAttnBtn').addEventListener('click', computeAttention);
+        document.getElementById('headSelect').addEventListener('change', computeAttention);
+        document.addEventListener('DOMContentLoaded', computeAttention);
+    </script>
+</body>
+</html>
