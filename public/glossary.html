@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Deep Learning Dictionary — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">INSTITUTIONAL AI LEXICON</span>
+            <h1 class="hero-title">AI & Deep Learning <span class="glow">Dictionary</span></h1>
+            <p class="hero-desc">Over 40+ rigorous mathematical and architectural definitions covering Neural Networks, Transformers, LLMs, and Multi-Agent Swarms.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1000px;">
+        <input type="text" id="glossarySearch" placeholder="Search terms (e.g. Backpropagation, LoRA, Attention, Perplexity)..." style="width:100%; background:var(--bg-card); color:var(--text-primary); border:1px solid var(--border); padding:12px 18px; border-radius:var(--radius-md); font-size:14px; margin-bottom:24px;">
+
+        <div style="display:flex; flex-direction:column; gap:12px;" id="glossaryList">
+            <div class="stat-card" style="flex-direction:column; align-items:start;"><h4 style="color:var(--accent);">Self-Attention (Scaled Dot-Product)</h4><p>An attention mechanism relating different positions of a single sequence to compute a representation of the sequence via Softmax((QK^T)/sqrt(d_k))V.</p></div>
+            <div class="stat-card" style="flex-direction:column; align-items:start;"><h4 style="color:var(--accent);">LoRA (Low-Rank Adaptation)</h4><p>A PEFT technique that freezes base LLM weights and injects trainable rank decomposition matrices into transformer layers.</p></div>
+            <div class="stat-card" style="flex-direction:column; align-items:start;"><h4 style="color:var(--accent);">Backpropagation</h4><p>An algorithm for computing the gradient of the loss function with respect to all neural network weights via the multivariate chain rule.</p></div>
+            <div class="stat-card" style="flex-direction:column; align-items:start;"><h4 style="color:var(--accent);">ReAct (Reason + Act)</h4><p>An agentic framework interleaving step-by-step verbal reasoning traces with environment tool invocations.</p></div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+</body>
+</html>

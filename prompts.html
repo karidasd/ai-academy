@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer Prompts Vault — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link active">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">PROMPT ENGINEERING LIBRARY</span>
+            <h1 class="hero-title">AI & Agentic <span class="glow">Prompt Engineering Vault</span></h1>
+            <p class="hero-desc">Battle-tested institutional prompts for orchestrating multi-agent systems, writing PyTorch training pipelines, and building low-latency RAG architectures.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1100px;">
+        <div class="prompt-card">
+            <div class="prompt-header">
+                <h3>🤖 Autonomous ReAct Agent Loop Template</h3>
+                <button class="btn btn-primary" onclick="copyCode(this)">COPY PROMPT</button>
+            </div>
+            <div class="prompt-body">You are an elite Autonomous AI Agent Architect.
+Design a production-grade ReAct (Reason + Act) loop in Python using LangGraph.
+
+REQUIREMENTS:
+1. Define a global TypedDict state tracking 'task', 'iteration', 'tool_calls', and 'final_output'.
+2. Implement dynamic tool execution with sandboxed error handling and automatic retry reflection.
+3. Include a Supervisor validation gate before returning answers to the user.</div>
+        </div>
+
+        <div class="prompt-card">
+            <div class="prompt-header">
+                <h3>⚡ PyTorch Custom Transformer Layer & Attention</h3>
+                <button class="btn btn-primary" onclick="copyCode(this)">COPY PROMPT</button>
+            </div>
+            <div class="prompt-body">You are a PyTorch deep learning systems engineer.
+Implement a clean, vectorized Multi-Head Attention layer in PyTorch from scratch without using nn.MultiheadAttention.
+
+REQUIREMENTS:
+1. Compute Q, K, V projections using linear layers.
+2. Apply the Scaled Dot-Product equation with optional causal mask.
+3. Include RoPE (Rotary Position Embeddings) and FlashAttention-2 integration.</div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+</body>
+</html>

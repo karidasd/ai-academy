@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer Certification Studio — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link active">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">GRADUATION DIPLOMA STUDIO</span>
+            <h1 class="hero-title">Certified <span class="glow">AI & Agent Architect Diploma</span></h1>
+            <p class="hero-desc">Generate your verified DarkAIs AI Engineer Diploma with real-time student name rendering, custom tracks, unique cryptographic verification hashes, and PNG export.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1200px;">
+        <div style="display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px;">
+                <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">🎓 Student Credentials</h3>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">STUDENT FULL NAME</label>
+                    <input type="text" id="studentName" value="DIMITRIS KARYDAS" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm); font-weight:bold;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">SPECIALIZATION TRACK</label>
+                    <select id="certTrack" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                        <option value="Autonomous AI & Agentic Systems Architect">Autonomous AI & Agentic Systems Architect</option>
+                        <option value="Transformers & Large Language Model Engineer">Transformers & Large Language Model Engineer</option>
+                        <option value="Deep Learning & Neural Optimization Specialist">Deep Learning & Neural Optimization Specialist</option>
+                    </select>
+                </div>
+                <button id="downloadCertBtn" class="btn btn-primary" style="width: 100%;">📥 Download High-Res Diploma (PNG)</button>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px;">
+                <canvas id="certCanvas" width="900" height="600" style="width: 100%; height: auto; background: #05070D; border: 1px solid var(--border); border-radius: 8px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+    <script>
+        const canvas = document.getElementById('certCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function drawDiploma() {
+            const name = (document.getElementById('studentName').value || 'STUDENT NAME').toUpperCase();
+            const track = document.getElementById('certTrack').value;
+            const hash = 'DARK-AI-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Dark background
+            ctx.fillStyle = '#06080E';
+            ctx.fillRect(0, 0, 900, 600);
+
+            // Border
+            ctx.strokeStyle = '#A855F7';
+            ctx.lineWidth = 4;
+            ctx.strokeRect(25, 25, 850, 550);
+            ctx.strokeStyle = '#00F0FF';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(35, 35, 830, 530);
+
+            // Titles
+            ctx.fillStyle = '#A855F7';
+            ctx.font = 'bold 20px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText('DARKAIS ARTIFICIAL INTELLIGENCE ACADEMY', 450, 90);
+
+            ctx.fillStyle = '#94A3B8';
+            ctx.font = '14px Roboto';
+            ctx.fillText('THIS IS TO OFFICIALLY CERTIFY THAT', 450, 150);
+
+            ctx.fillStyle = '#F1F5F9';
+            ctx.font = 'bold 32px Orbitron';
+            ctx.fillText(name, 450, 220);
+
+            ctx.fillStyle = '#94A3B8';
+            ctx.font = '14px Roboto';
+            ctx.fillText('HAS SUCCESSFULLY DEMONSTRATED INSTITUTIONAL MASTERY IN', 450, 280);
+
+            ctx.fillStyle = '#00F0FF';
+            ctx.font = 'bold 22px Orbitron';
+            ctx.fillText(track, 450, 330);
+
+            ctx.fillStyle = '#64748B';
+            ctx.font = '13px Roboto';
+            ctx.fillText('Covering Backpropagation Calculus, Transformers (QKV Attention), LoRA PEFT, and Autonomous ReAct Loops.', 450, 390);
+
+            // Footer / Seal
+            ctx.fillStyle = '#A855F7';
+            ctx.font = 'bold 12px JetBrains Mono';
+            ctx.textAlign = 'left';
+            ctx.fillText('ISSUED BY: DARKAIS AI RESEARCH', 60, 510);
+            ctx.fillText('VERIFICATION HASH: ' + hash, 60, 530);
+
+            ctx.textAlign = 'right';
+            ctx.fillText('DATE: ' + new Date().toLocaleDateString('en-US'), 840, 510);
+            ctx.fillText('STATUS: VERIFIED & IMMUTABLE', 840, 530);
+        }
+
+        document.getElementById('studentName').addEventListener('input', drawDiploma);
+        document.getElementById('certTrack').addEventListener('change', drawDiploma);
+        document.getElementById('downloadCertBtn').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'DarkAIs_AI_Diploma.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            playSound('success');
+        });
+        document.addEventListener('DOMContentLoaded', drawDiploma);
+    </script>
+</body>
+</html>

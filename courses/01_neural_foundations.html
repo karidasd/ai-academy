@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course 01: Neural Foundations: Perceptrons & Activation Math — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="../index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="../index.html" class="nav-link ">Curriculum</a>
+            <a href="../playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="../calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="../studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="../embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="../prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="../downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="../certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="lesson-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="lesson-sidebar">
+            <div class="sidebar-title">AI & AGENTS CURRICULUM</div>
+            <ul class="sidebar-menu">
+                
+                    <li class="sidebar-item active" data-sidebar-id="01">
+                        <a href="01_neural_foundations.html"><span class="num">01</span>  Perceptrons & Activation Math</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="02">
+                        <a href="02_backprop_optimization.html"><span class="num">02</span> Backpropagation Calculus & Gradient Optimizers</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="03">
+                        <a href="03_deep_architectures.html"><span class="num">03</span>  Convolutions & ResNets</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="04">
+                        <a href="04_embeddings_latent.html"><span class="num">04</span> Vector Embeddings & Latent Space Geometry</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="05">
+                        <a href="05_attention_transformers.html"><span class="num">05</span> Attention Mechanisms & Transformer Math</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="06">
+                        <a href="06_llm_pretraining.html"><span class="num">06</span> LLM Pretraining, Perplexity & Scaling Laws</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="07">
+                        <a href="07_finetuning_lora.html"><span class="num">07</span> Fine-Tuning, LoRA & Parameter Efficiency (PEFT)</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="08">
+                        <a href="08_rag_vector_dbs.html"><span class="num">08</span> RAG Architecture, Vector DBs & HNSW Indexing</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="09">
+                        <a href="09_prompt_engineering.html"><span class="num">09</span> Prompt Engineering, CoT & In-Context Learning</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="10">
+                        <a href="10_agentic_loops.html"><span class="num">10</span> Autonomous Agent Loops (ReAct Framework)</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="11">
+                        <a href="11_multi_agent_frameworks.html"><span class="num">11</span> Multi-Agent Swarms & Consensus Hierarchies</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="12">
+                        <a href="12_production_ai_deployment.html"><span class="num">12</span>  vLLM & KV Caching</a>
+                    </li>
+                
+            </ul>
+        </aside>
+
+        <!-- Main Lesson Content -->
+        <main class="lesson-main">
+            <div class="breadcrumbs">
+                <a href="../index.html">Academy</a> <span>/</span>
+                <a href="../index.html#part1">AI Curriculum</a> <span>/</span>
+                <span>Course 01</span>
+            </div>
+
+            <div class="lesson-header">
+                <div class="lesson-meta">
+                    <span class="lesson-module-tag">MODULE 01</span>
+                    <span class="lesson-time">⏱️ 15-25 MIN READ</span>
+                </div>
+                <h1 class="lesson-title">Neural Foundations: Perceptrons & Activation Math</h1>
+                <p class="lesson-lead">Understand the mathematical mechanics of biological vs artificial neurons, linear hyperplanes, and non-linear activation functions.</p>
+            </div>
+
+            <div class="lesson-body">
+                
+            <h2>1. The Artificial Neuron (Frank Rosenblatt's Perceptron)</h2>
+            <p>At its fundamental level, an artificial neuron computes the weighted sum of its inputs, adds a scalar bias term, and maps the output through an activation function \(\sigma(z)\):</p>
+            <p style="text-align:center; font-family:'JetBrains Mono'; font-size:16px; color:#C084FC; margin:16px 0;">
+                \[ z = \mathbf{w}^T \mathbf{x} + b = \sum_{i=1}^{n} w_i x_i + b \]
+            </p>
+            <p>The scalar bias \(b\) shifts the decision boundary hyperplane away from the origin, allowing the model to fit non-zero-centered classification boundaries.</p>
+
+            <h2>2. Non-Linear Activation Functions</h2>
+            <p>Without non-linear activations, stacking multiple dense layers results in a single linear transformation: \(W_2(W_1 x + b_1) + b_2 = (W_2 W_1) x + (W_2 b_1 + b_2)\), rendering deep architectures no more powerful than linear regression.</p>
+            <ul>
+                <li><strong>ReLU (Rectified Linear Unit):</strong> \(f(x) = \max(0, x)\). Fast compute and zero gradient saturation for positive values, but susceptible to the "Dying ReLU" problem when gradients become zero for \(x < 0\).</li>
+                <li><strong>GELU (Gaussian Error Linear Unit):</strong> Used in modern Transformers (BERT, GPT-4):
+                    <p style="text-align:center; font-family:'JetBrains Mono'; color:#C084FC; margin:8px 0;">\[ \text{GELU}(x) = x \cdot \Phi(x) = x \cdot P(X \le x), \quad X \sim \mathcal{N}(0,1) \]</p>
+                </li>
+                <li><strong>Sigmoid & Tanh:</strong> Essential for probability bounding \(\sigma(z) = \frac{1}{1 + e^{-z}}\) and zero-centered outputs \([-1, 1]\).</li>
+            </ul>
+
+            <div class="callout success">
+                <div class="callout-title">💡 Deep Learning Insight</div>
+                Modern LLMs exclusively utilize GELU or SwiGLU activations because their continuous curvature allows stochastic gradient descent to navigate narrow loss valleys without abrupt zero-gradient cliffs.
+            </div>
+        
+            </div>
+
+            <!-- Quiz Box -->
+            <div class="quiz-container" id="quizBox" data-lesson-id="01">
+                <div class="quiz-header">
+                    <h3 class="quiz-title">🎯 Module Mastery Certification Quiz</h3>
+                    <span style="font-size:11px; color:var(--accent);" class="mono">+100 XP</span>
+                </div>
+                <div class="quiz-question">Why is a non-linear activation function mathematically required in deep neural networks?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option">To accelerate GPU hardware memory bandwidth.</div><div class="quiz-option">Without non-linearities, multiple linear layers collapse mathematically into a single linear matrix multiplication.</div><div class="quiz-option">To prevent the weights from exceeding a value of 1.0.</div><div class="quiz-option">To force all gradients to become strictly positive.</div>
+                </div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+                <button class="btn btn-primary" id="quizSubmitBtn" style="width:100%;" disabled>Submit Answer</button>
+            </div>
+
+            <div class="lesson-nav-footer">
+                <a href="../index.html" class="btn btn-outline">← Previous</a>
+                <a href="02_backprop_optimization.html" class="btn btn-primary">Next Module →</a>
+            </div>
+        </main>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="../js/academy.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setupQuiz(1, "Without non-linear activation functions, any composition of linear functions is strictly linear, making deep networks incapable of learning non-linear functions (like XOR).", "01");
+        });
+    </script>
+</body>
+</html>

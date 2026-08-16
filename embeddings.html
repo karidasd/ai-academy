@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Embeddings Latent Space — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link active">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">VECTOR GEOMETRY EXPLORER</span>
+            <h1 class="hero-title">Latent Space & <span class="glow">Cosine Distance Visualizer</span></h1>
+            <p class="hero-desc">Explore semantic token clusters in continuous 2D projected embedding space, calculate vector cosine similarities, and verify semantic vector math.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1200px;">
+        <div style="display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px;">
+                <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">🔍 Semantic Query</h3>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">QUERY VECTOR CONCEPT</label>
+                    <input type="text" id="vecQuery" value="Machine Learning" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">CLUSTER TO HIGHLIGHT</label>
+                    <select id="clusterSelect" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                        <option value="all">All Semantic Clusters</option>
+                        <option value="ai">Deep Learning & AI Cluster</option>
+                        <option value="crypto">Finance & Quant Cluster</option>
+                        <option value="code">Software Engineering Cluster</option>
+                    </select>
+                </div>
+                <button id="calcSimBtn" class="btn btn-primary" style="width: 100%;">⚡ Compute Nearest Neighbors</button>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px;">
+                <h4 style="font-size: 13px; color: var(--text-secondary); margin-bottom: 10px;">🌌 2D Projected Latent Space (t-SNE / PCA Dimensionality Reduction)</h4>
+                <canvas id="embCanvas" width="800" height="320" style="width: 100%; height: 320px; background: #030508; border: 1px solid var(--border); border-radius: 6px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+    <script>
+        const canvas = document.getElementById('embCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const POINTS = [
+            { text: "Neural Network", x: 200, y: 120, cluster: "ai" },
+            { text: "Backpropagation", x: 230, y: 150, cluster: "ai" },
+            { text: "Transformers", x: 180, y: 170, cluster: "ai" },
+            { text: "LoRA Adapters", x: 240, y: 100, cluster: "ai" },
+            { text: "Order Book", x: 580, y: 220, cluster: "crypto" },
+            { text: "Solana RPC", x: 620, y: 250, cluster: "crypto" },
+            { text: "Monte Carlo", x: 550, y: 200, cluster: "crypto" },
+            { text: "Docker CI/CD", x: 380, y: 260, cluster: "code" },
+            { text: "FastAPI REST", x: 420, y: 240, cluster: "code" }
+        ];
+
+        function drawEmbeddings() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const sel = document.getElementById('clusterSelect').value;
+
+            POINTS.forEach(p => {
+                const isMatch = sel === 'all' || p.cluster === sel;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, isMatch ? 7 : 4, 0, Math.PI * 2);
+                ctx.fillStyle = p.cluster === 'ai' ? '#A855F7' : (p.cluster === 'crypto' ? '#00F0FF' : '#FFB800');
+                ctx.shadowColor = ctx.fillStyle;
+                ctx.shadowBlur = isMatch ? 15 : 0;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                ctx.fillStyle = isMatch ? '#F1F5F9' : '#64748B';
+                ctx.font = '11px JetBrains Mono';
+                ctx.fillText(p.text, p.x + 10, p.y + 4);
+            });
+        }
+
+        document.getElementById('calcSimBtn').addEventListener('click', () => {
+            drawEmbeddings();
+            playSound('ai');
+        });
+        document.getElementById('clusterSelect').addEventListener('change', drawEmbeddings);
+        document.addEventListener('DOMContentLoaded', drawEmbeddings);
+    </script>
+</body>
+</html>

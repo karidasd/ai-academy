@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course 07: Fine-Tuning, LoRA & Parameter Efficiency (PEFT) — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="../index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="../index.html" class="nav-link ">Curriculum</a>
+            <a href="../playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="../calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="../studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="../embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="../prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="../downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="../certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="lesson-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="lesson-sidebar">
+            <div class="sidebar-title">AI & AGENTS CURRICULUM</div>
+            <ul class="sidebar-menu">
+                
+                    <li class="sidebar-item " data-sidebar-id="01">
+                        <a href="01_neural_foundations.html"><span class="num">01</span>  Perceptrons & Activation Math</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="02">
+                        <a href="02_backprop_optimization.html"><span class="num">02</span> Backpropagation Calculus & Gradient Optimizers</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="03">
+                        <a href="03_deep_architectures.html"><span class="num">03</span>  Convolutions & ResNets</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="04">
+                        <a href="04_embeddings_latent.html"><span class="num">04</span> Vector Embeddings & Latent Space Geometry</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="05">
+                        <a href="05_attention_transformers.html"><span class="num">05</span> Attention Mechanisms & Transformer Math</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="06">
+                        <a href="06_llm_pretraining.html"><span class="num">06</span> LLM Pretraining, Perplexity & Scaling Laws</a>
+                    </li>
+                
+                    <li class="sidebar-item active" data-sidebar-id="07">
+                        <a href="07_finetuning_lora.html"><span class="num">07</span> Fine-Tuning, LoRA & Parameter Efficiency (PEFT)</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="08">
+                        <a href="08_rag_vector_dbs.html"><span class="num">08</span> RAG Architecture, Vector DBs & HNSW Indexing</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="09">
+                        <a href="09_prompt_engineering.html"><span class="num">09</span> Prompt Engineering, CoT & In-Context Learning</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="10">
+                        <a href="10_agentic_loops.html"><span class="num">10</span> Autonomous Agent Loops (ReAct Framework)</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="11">
+                        <a href="11_multi_agent_frameworks.html"><span class="num">11</span> Multi-Agent Swarms & Consensus Hierarchies</a>
+                    </li>
+                
+                    <li class="sidebar-item " data-sidebar-id="12">
+                        <a href="12_production_ai_deployment.html"><span class="num">12</span>  vLLM & KV Caching</a>
+                    </li>
+                
+            </ul>
+        </aside>
+
+        <!-- Main Lesson Content -->
+        <main class="lesson-main">
+            <div class="breadcrumbs">
+                <a href="../index.html">Academy</a> <span>/</span>
+                <a href="../index.html#part1">AI Curriculum</a> <span>/</span>
+                <span>Course 07</span>
+            </div>
+
+            <div class="lesson-header">
+                <div class="lesson-meta">
+                    <span class="lesson-module-tag">MODULE 07</span>
+                    <span class="lesson-time">⏱️ 15-25 MIN READ</span>
+                </div>
+                <h1 class="lesson-title">Fine-Tuning, LoRA & Parameter Efficiency (PEFT)</h1>
+                <p class="lesson-lead">Adapt massive 70B+ LLMs on consumer GPUs using Low-Rank Adaptation (LoRA) matrix decomposition and 4-bit NormalFloat quantization (QLoRA).</p>
+            </div>
+
+            <div class="lesson-body">
+                
+            <h2>1. Low-Rank Adaptation (LoRA) Mathematical Foundation</h2>
+            <p>Full fine-tuning updates all \(d \times k\) parameters \(W_0\). Hu et al. observed that weight updates \(\Delta W\) have a low 'intrinsic rank'. LoRA freezes \(W_0\) and decomposes \(\Delta W\) into two low-rank matrices \(B \in \mathbb{R}^{d \times r}\) and \(A \in \mathbb{R}^{r \times k}\) with rank \(r \ll \min(d, k)\):</p>
+            <p style="text-align:center; font-family:'JetBrains Mono'; font-size:18px; color:#00F0FF; margin:16px 0; background:rgba(0,240,255,0.06); padding:12px; border-radius:8px;">
+                \[ h = W_0 x + \Delta W x = W_0 x + \frac{\alpha}{r} B A x \]
+            </p>
+            <p>When \(d = 4096\) and rank \(r = 16\), the number of trainable parameters drops by **over 99.6%**, reducing VRAM requirements from 160GB to under 16GB!</p>
+
+            <h2>2. QLoRA (Dettmers et al.)</h2>
+            <p>QLoRA quantizes the frozen base model weights into **4-bit NormalFloat (NF4)** and uses Double Quantization + Paged Optimizers to prevent CUDA out-of-memory spikes during gradient backpropagation.</p>
+        
+            </div>
+
+            <!-- Quiz Box -->
+            <div class="quiz-container" id="quizBox" data-lesson-id="07">
+                <div class="quiz-header">
+                    <h3 class="quiz-title">🎯 Module Mastery Certification Quiz</h3>
+                    <span style="font-size:11px; color:var(--accent);" class="mono">+100 XP</span>
+                </div>
+                <div class="quiz-question">How does LoRA (Low-Rank Adaptation) reduce VRAM requirements by over 95% during LLM fine-tuning?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option">By freezing the original weight matrix W0 and learning only two small low-rank adapter matrices B and A.</div><div class="quiz-option">By pruning 90% of the attention heads permanently.</div><div class="quiz-option">By running the model entirely on CPU RAM.</div><div class="quiz-option">By reducing text context window to 64 tokens.</div>
+                </div>
+                <div class="quiz-feedback" id="quizFeedback"></div>
+                <button class="btn btn-primary" id="quizSubmitBtn" style="width:100%;" disabled>Submit Answer</button>
+            </div>
+
+            <div class="lesson-nav-footer">
+                <a href="06_llm_pretraining.html" class="btn btn-outline">← Previous</a>
+                <a href="08_rag_vector_dbs.html" class="btn btn-primary">Next Module →</a>
+            </div>
+        </main>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="../js/academy.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setupQuiz(0, "LoRA decomposes the weight update into two low-rank matrices (B and A) while freezing W0, drastically reducing trainable parameter counts and optimizer state memory.", "07");
+        });
+    </script>
+</body>
+</html>
