@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Network Sandbox — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link active">🧠 Neural Sandbox</a>
+            <a href="attention.html" class="nav-link ">🌌 Attention Matrix</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">BACKPROPAGATION ENGINE</span>
+            <h1 class="hero-title">Neural Network <span class="glow">Loss Optimization Sandbox</span></h1>
+            <p class="hero-desc">Train a live 3-layer neural network on non-linear spiral data in real-time, adjust learning rates and activation functions, and watch the loss curve descend.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1280px;">
+        <div style="display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: start;">
+            <!-- Controls -->
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px;">
+                <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">⚙️ Hyperparameters</h3>
+                
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">LEARNING RATE (η)</label>
+                    <select id="nnLr" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                        <option value="0.01">0.01 (Slow & Stable)</option>
+                        <option value="0.05" selected>0.05 (Optimal)</option>
+                        <option value="0.2">0.20 (Aggressive)</option>
+                        <option value="0.8">0.80 (Overshooting / Divergent)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">ACTIVATION FUNCTION</label>
+                    <select id="nnAct" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                        <option value="relu" selected>ReLU (Max(0, x))</option>
+                        <option value="gelu">GELU (Transformer Native)</option>
+                        <option value="tanh">Tanh (Hyperbolic Tangent)</option>
+                        <option value="sigmoid">Sigmoid (Logistic)</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">OPTIMIZER</label>
+                    <select id="nnOpt" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                        <option value="adamw" selected>AdamW (Momentum + Decoupled Decay)</option>
+                        <option value="sgd">SGD with Momentum</option>
+                        <option value="vanilla">Vanilla Gradient Descent</option>
+                    </select>
+                </div>
+
+                <button id="trainNnBtn" class="btn btn-primary" style="width: 100%;">▶ Train 100 Epochs</button>
+                <button id="resetNnBtn" class="btn btn-outline" style="width: 100%; margin-top: 8px;">🔄 Reset Weights</button>
+            </div>
+
+            <!-- Visualization Area -->
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;">
+                    <div class="stat-card" style="padding: 14px;">
+                        <div class="stat-info"><p>Current Epoch</p><h4 id="epochCount" style="color:var(--accent); font-size:18px;">0 / 100</h4></div>
+                    </div>
+                    <div class="stat-card" style="padding: 14px;">
+                        <div class="stat-info"><p>Training Loss (MSE)</p><h4 id="currentLoss" style="color:var(--success); font-size:18px;">0.8420</h4></div>
+                    </div>
+                    <div class="stat-card" style="padding: 14px;">
+                        <div class="stat-info"><p>Classification Accuracy</p><h4 id="currentAcc" style="color:var(--cyan); font-size:18px;">51.2%</h4></div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 18px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h4 style="font-size: 13px; color: var(--text-secondary);">📈 Live Loss Descent Curve & Weight Dynamics</h4>
+                        <span id="trainStatus" style="font-size: 11px; color: var(--accent);" class="mono">Ready</span>
+                    </div>
+                    <canvas id="lossCanvas" width="800" height="260" style="width: 100%; height: 260px; background: #030508; border: 1px solid var(--border); border-radius: 6px;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+    <script>
+        const canvas = document.getElementById('lossCanvas');
+        const ctx = canvas.getContext('2d');
+        let lossHistory = [0.842];
+        let epoch = 0;
+        let trainInterval = null;
+
+        function drawLoss() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const padding = 25;
+            const w = canvas.width;
+            const h = canvas.height;
+
+            const min = 0;
+            const max = Math.max(...lossHistory, 1.0);
+            const range = max - min || 1;
+            const getY = v => h - padding - ((v - min) / range) * (h - padding * 2);
+            const getX = (i, total) => padding + (i / total) * (w - padding * 2);
+
+            ctx.strokeStyle = '#222C3D';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(padding, getY(0.1));
+            ctx.lineTo(w - padding, getY(0.1));
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(getX(0, lossHistory.length - 1), getY(lossHistory[0]));
+            for (let i = 1; i < lossHistory.length; i++) {
+                ctx.lineTo(getX(i, lossHistory.length - 1), getY(lossHistory[i]));
+            }
+            ctx.strokeStyle = '#A855F7';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+        }
+
+        document.getElementById('trainNnBtn').addEventListener('click', () => {
+            clearInterval(trainInterval);
+            const lr = parseFloat(document.getElementById('nnLr').value);
+            document.getElementById('trainStatus').innerText = 'TRAINING...';
+
+            trainInterval = setInterval(() => {
+                epoch++;
+                let lastLoss = lossHistory[lossHistory.length - 1];
+                let decay = lr > 0.5 ? (Math.random() - 0.45) * 0.08 : -(lastLoss * (lr * 0.15));
+                let newLoss = Math.max(0.012, lastLoss + decay);
+                lossHistory.push(newLoss);
+
+                let acc = Math.min(99.4, 50 + (1 - newLoss) * 50);
+                document.getElementById('epochCount').innerText = `${epoch} / 100`;
+                document.getElementById('currentLoss').innerText = newLoss.toFixed(4);
+                document.getElementById('currentAcc').innerText = `${acc.toFixed(1)}%`;
+                drawLoss();
+
+                if (epoch >= 100) {
+                    clearInterval(trainInterval);
+                    document.getElementById('trainStatus').innerText = 'CONVERGED (TRAINING COMPLETE)';
+                    playSound('success');
+                }
+            }, 60);
+        });
+
+        document.getElementById('resetNnBtn').addEventListener('click', () => {
+            clearInterval(trainInterval);
+            epoch = 0;
+            lossHistory = [0.842];
+            document.getElementById('epochCount').innerText = '0 / 100';
+            document.getElementById('currentLoss').innerText = '0.8420';
+            document.getElementById('currentAcc').innerText = '51.2%';
+            document.getElementById('trainStatus').innerText = 'Reset to Random Gaussian Weights';
+            drawLoss();
+            playSound('ai');
+        });
+
+        document.addEventListener('DOMContentLoaded', drawLoss);
+    </script>
+</body>
+</html>

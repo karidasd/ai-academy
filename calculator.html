@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Token & Cost Calculator — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="attention.html" class="nav-link ">🌌 Attention Matrix</a>
+            <a href="calculator.html" class="nav-link active">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">INFRASTRUCTURE PLANNING</span>
+            <h1 class="hero-title">LLM Token, Latency & <span class="glow">API Cost Matrix</span></h1>
+            <p class="hero-desc">Estimate token usage, calculate monthly API inference bills across top LLMs (GPT-4o, Claude 3.5 Sonnet, Llama 3 70B), and optimize GPU VRAM memory budgets.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1200px;">
+        <div style="display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px;">
+                <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">📊 Workload Parameters</h3>
+                
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">DAILY API REQUESTS</label>
+                    <input type="number" id="dailyRequests" value="5000" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm); font-weight: bold;">
+                </div>
+
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">AVG INPUT TOKENS / REQUEST</label>
+                    <input type="number" id="inputTokens" value="1200" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">AVG OUTPUT TOKENS / REQUEST</label>
+                    <input type="number" id="outputTokens" value="400" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                </div>
+
+                <button id="calcLlmBtn" class="btn btn-primary" style="width: 100%;">🧮 Compute Cost Matrix</button>
+            </div>
+
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden;">
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Model / Provider</th>
+                            <th>Input / 1M</th>
+                            <th>Output / 1M</th>
+                            <th>Est. Monthly Cost</th>
+                            <th>Efficiency</th>
+                        </tr>
+                    </thead>
+                    <tbody id="llmCostTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+    <script>
+        const MODELS = [
+            { name: "Claude 3.5 Sonnet", inPrice: 3.00, outPrice: 15.00, tier: "SOTA Coding / Agents" },
+            { name: "GPT-4o", inPrice: 2.50, outPrice: 10.00, tier: "Multimodal Flagship" },
+            { name: "Claude 3.5 Haiku", inPrice: 0.80, outPrice: 4.00, tier: "Ultra Fast Agentic" },
+            { name: "GPT-4o mini", inPrice: 0.15, outPrice: 0.60, tier: "High-Volume Lightweight" },
+            { name: "DeepSeek-V3 / Llama 3 70B", inPrice: 0.27, outPrice: 1.10, tier: "Open Weights / Self-Hosted" }
+        ];
+
+        function calculateCosts() {
+            const req = parseFloat(document.getElementById('dailyRequests').value) || 5000;
+            const inTok = parseFloat(document.getElementById('inputTokens').value) || 1200;
+            const outTok = parseFloat(document.getElementById('outputTokens').value) || 400;
+
+            const monthlyInM = (req * inTok * 30) / 1000000;
+            const monthlyOutM = (req * outTok * 30) / 1000000;
+
+            const tbody = document.getElementById('llmCostTable');
+            tbody.innerHTML = '';
+
+            MODELS.forEach(m => {
+                const totalCost = (monthlyInM * m.inPrice) + (monthlyOutM * m.outPrice);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><strong>${m.name}</strong><br><span style="font-size:10px; color:var(--text-muted);">${m.tier}</span></td>
+                    <td class="mono">$${m.inPrice.toFixed(2)}</td>
+                    <td class="mono">$${m.outPrice.toFixed(2)}</td>
+                    <td class="mono" style="font-weight:bold; color:var(--accent); font-size:15px;">$${totalCost.toLocaleString('en-US', {maximumFractionDigits:2})}</td>
+                    <td><span class="impact-badge impact-high">${totalCost < 500 ? '🟢 Budget Friendly' : '🟡 Enterprise Grade'}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+            playSound('ai');
+        }
+
+        document.getElementById('calcLlmBtn').addEventListener('click', calculateCosts);
+        ['dailyRequests', 'inputTokens', 'outputTokens'].forEach(id => {
+            document.getElementById(id).addEventListener('input', calculateCosts);
+        });
+        document.addEventListener('DOMContentLoaded', calculateCosts);
+    </script>
+</body>
+</html>

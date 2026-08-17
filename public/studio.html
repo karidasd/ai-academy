@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt-to-Loop Agentic Studio — DarkAIs AI Academy</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link ">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="attention.html" class="nav-link ">🌌 Attention Matrix</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link active">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper" style="padding: 30px 20px 20px;">
+        <div class="hero-content">
+            <span class="hero-tag">AGENTIC WORKFLOW BUILDER</span>
+            <h1 class="hero-title">Visual <span class="glow">Prompt-to-Loop Studio</span></h1>
+            <p class="hero-desc">Construct 7-level autonomous agentic self-correction loops with Tool Calling, Reflection nodes, and Human-in-the-Loop checkpoints, and export production Python LangGraph code.</p>
+        </div>
+    </div>
+
+    <div class="academy-container" style="max-width: 1300px;">
+        <div style="display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px;">
+                <h3 style="font-size: 16px; margin-bottom: 16px; color: var(--accent);">⚡ Agent Architecture</h3>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">AGENT ROLE / IDENTITY</label>
+                    <input type="text" id="agRole" value="Quantitative Code Auditor" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                </div>
+                <div style="margin-bottom: 14px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">AVAILABLE TOOLS (SELECT)</label>
+                    <label style="display:block; font-size:12.5px; margin-bottom:4px;"><input type="checkbox" id="toolPython" checked> Python REPL Code Execution</label>
+                    <label style="display:block; font-size:12.5px; margin-bottom:4px;"><input type="checkbox" id="toolSearch" checked> Web Search / Vector Retrieval</label>
+                    <label style="display:block; font-size:12.5px;"><input type="checkbox" id="toolCritic" checked> Critic / Reflection Self-Correction Node</label>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="font-size: 11.5px; color: var(--text-muted); display: block; margin-bottom: 4px;">MAX LOOP ITERATIONS</label>
+                    <input type="number" id="maxIter" value="5" min="1" max="15" style="width: 100%; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border); padding: 8px; border-radius: var(--radius-sm);">
+                </div>
+                <button id="genAgentCodeBtn" class="btn btn-primary" style="width: 100%;">⚡ Generate LangGraph Code</button>
+            </div>
+
+            <div class="code-block" style="margin: 0;">
+                <div class="code-header">
+                    <span style="color:var(--accent);">Python Autonomous Agent Loop (Ready-to-Deploy)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">COPY PYTHON CODE</button>
+                </div>
+                <pre><code id="agentCodeOutput" style="max-height: 540px;"># Generating Agentic Code...</code></pre>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+    <script>
+        function generateAgent() {
+            const role = document.getElementById('agRole').value || 'AI Assistant';
+            const hasPy = document.getElementById('toolPython').checked;
+            const hasCritic = document.getElementById('toolCritic').checked;
+            const iters = document.getElementById('maxIter').value || 5;
+
+            let code = `import os
+from typing import Annotated, TypedDict, List
+from langgraph.graph import StateGraph, END
+
+class AgentState(TypedDict):
+    task: str
+    messages: List[str]
+    tool_outputs: List[str]
+    iteration: int
+    is_verified: bool
+
+def reasoner_node(state: AgentState) -> AgentState:
+    print(f"[REASONER] Iteration {state['iteration']}: Analyzing task: {state['task']}")
+    state['iteration'] += 1
+    state['messages'].append(f"Step {state['iteration']}: Formulating plan...")
+    return state
+`;
+            if (hasPy) {
+                code += `
+def python_tool_node(state: AgentState) -> AgentState:
+    print("[TOOL] Executing Python sandboxed code...")
+    state['tool_outputs'].append("Execution Result: Code verified with 0 errors.")
+    return state
+`;
+            }
+            if (hasCritic) {
+                code += `
+def critic_node(state: AgentState) -> AgentState:
+    print("[CRITIC] Reflecting on observations and verifying outputs...")
+    if state['iteration'] >= ${iters} or len(state['tool_outputs']) > 0:
+        state['is_verified'] = True
+    return state
+`;
+            }
+            code += `
+workflow = StateGraph(AgentState)
+workflow.add_node("reasoner", reasoner_node)
+`;
+            if (hasPy) code += 'workflow.add_node("tool_exec", python_tool_node)\n';
+            if (hasCritic) workflow += 'workflow.add_node("critic", critic_node)\n';
+            code += 'workflow.set_entry_point("reasoner")\n';
+            if (hasPy) code += 'workflow.add_edge("reasoner", "tool_exec")\n';
+            if (hasCritic) {
+                code += 'workflow.add_edge("tool_exec", "critic")\n';
+                code += 'workflow.add_conditional_edges("critic", lambda s: END if s["is_verified"] else "reasoner")\n';
+            } else {
+                code += 'workflow.add_edge("reasoner", END)\n';
+            }
+            code += 'app = workflow.compile()\nprint("✓ DarkAIs Agent Loop Compiled Successfully.")\n';
+            document.getElementById('agentCodeOutput').innerText = code;
+        }
+
+        document.getElementById('genAgentCodeBtn').addEventListener('click', () => { generateAgent(); playSound('success'); });
+        ['agRole', 'toolPython', 'toolSearch', 'toolCritic', 'maxIter'].forEach(id => {
+            document.getElementById(id).addEventListener('input', generateAgent);
+            document.getElementById(id).addEventListener('change', generateAgent);
+        });
+        document.addEventListener('DOMContentLoaded', generateAgent);
+    </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkAIs AI Academy — Institutional Deep Learning, Transformers & Agentic AI</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;800;900&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <h1>🧠 DARKAIS <span class="accent">AI ACADEMY</span></h1>
+            </a>
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="nav-link active">Curriculum</a>
+            <a href="playground.html" class="nav-link ">🧠 Neural Sandbox</a>
+            <a href="attention.html" class="nav-link ">🌌 Attention Matrix</a>
+            <a href="calculator.html" class="nav-link ">🧮 LLM Calculator</a>
+            <a href="studio.html" class="nav-link ">⚡ Prompt-to-Loop</a>
+            <a href="embeddings.html" class="nav-link ">🌌 Embeddings</a>
+            <a href="prompts.html" class="nav-link ">🤖 AI Prompts</a>
+            <a href="downloads.html" class="nav-link ">📦 Code Vault</a>
+            <a href="certificate.html" class="nav-link ">🎓 Diploma</a>
+        </nav>
+        <div class="header-right">
+            <a href="https://github.com/karidasd/ai-academy" target="_blank" class="header-star-btn">⭐ Star</a>
+            <button class="search-trigger-btn" id="searchTriggerBtn"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search <kbd>Ctrl+K</kbd></button>
+            <div class="theme-picker">
+                <div class="theme-dot purple" onclick="setTheme('purple')" title="Deep Violet"></div>
+                <div class="theme-dot cyan" onclick="setTheme('cyan')" title="Cyber Cyan"></div>
+                <div class="theme-dot matrix" onclick="setTheme('matrix')" title="Matrix Green"></div>
+                <div class="theme-dot gold" onclick="setTheme('gold')" title="FTMO Gold"></div>
+            </div>
+            <button class="icon-btn" id="muteBtn" onclick="toggleMute()" title="Toggle Sound">🔊</button>
+            <div class="progress-badge">
+                <div class="bar"><div class="bar-fill" id="globalProgressBar" style="width: 0%;"></div></div>
+                <span id="globalProgressText">0%</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero-wrapper">
+        <div class="hero-content">
+            <span class="hero-tag">INSTITUTIONAL DEEP LEARNING & AI ENGINEERING</span>
+            <h1 class="hero-title">Master Transformers, Neural Networks & <span class="glow">Autonomous AI Agents</span></h1>
+            <p class="hero-desc">An end-to-end curriculum bridging mathematical foundations (Backpropagation, Self-Attention QKV, LoRA PEFT) with production-grade autonomous agent loops and high-throughput inference.</p>
+            <div class="hero-actions">
+                <a href="courses/01_neural_foundations.html" class="btn btn-primary">▶ Start Course 01</a>
+                <a href="playground.html" class="btn btn-outline">🧠 Neural Sandbox</a>
+                <a href="attention.html" class="btn btn-outline">🌌 Attention Matrix</a>
+                <a href="studio.html" class="btn btn-outline" style="border-color:#C084FC; color:#C084FC;">⚡ Prompt-to-Loop Studio</a>
+                <a href="calculator.html" class="btn btn-outline">🧮 LLM Calculator</a>
+                <a href="embeddings.html" class="btn btn-outline">🌌 Embeddings Explorer</a>
+                <a href="downloads.html" class="btn btn-outline">📦 Python AI Code</a>
+                <a href="certificate.html" class="btn btn-outline">🎓 Diploma</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-strip">
+        <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-info">
+                <h4>12 Modules</h4>
+                <p>Complete Curriculum</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🧠</div>
+            <div class="stat-info">
+                <h4>Neural Sandbox</h4>
+                <p>Live Canvas Backprop</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-info">
+                <h4>Agentic Loops</h4>
+                <p>Self-Correcting AI</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🌌</div>
+            <div class="stat-info">
+                <h4>Transformers</h4>
+                <p>Multi-Head Attention</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="academy-container">
+        <!-- PART 1 -->
+        <section>
+            <div class="track-header">
+                <div class="track-title"><span>Part 1: Neural Foundations & Optimization Calculus</span><span class="track-badge">3 MODULES</span></div>
+            </div>
+            <div class="course-grid">
+                <a href="courses/01_neural_foundations.html" class="course-card" data-lesson-id="01">
+                    <div class="course-card-top"><span class="course-number">COURSE 01</span><span class="course-duration">⏱️ 14 MIN</span></div>
+                    <h3>Neural Foundations & Activation Math</h3>
+                    <p>Perceptrons, linear separability, forward pass matrix multiplication, and non-linear activations (ReLU, GELU, Sigmoid, Swish).</p>
+                    <div class="course-tags"><span class="tag">Perceptron</span><span class="tag">GELU</span><span class="tag">Forward Pass</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/02_backprop_optimization.html" class="course-card" data-lesson-id="02">
+                    <div class="course-card-top"><span class="course-number">COURSE 02</span><span class="course-duration">⏱️ 18 MIN</span></div>
+                    <h3>Backpropagation Calculus & Optimizers</h3>
+                    <p>Chain rule partial derivatives, computation graphs, Stochastic Gradient Descent (SGD), Momentum, AdamW, and learning rate schedules.</p>
+                    <div class="course-tags"><span class="tag">Chain Rule</span><span class="tag">AdamW</span><span class="tag">Loss Curves</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/03_deep_architectures.html" class="course-card" data-lesson-id="03">
+                    <div class="course-card-top"><span class="course-number">COURSE 03</span><span class="course-duration">⏱️ 16 MIN</span></div>
+                    <h3>Deep Architectures & Vanishing Gradients</h3>
+                    <p>Convolution kernels, ResNet skip connections, Batch Normalization vs Layer Normalization, and vanishing gradient remedies.</p>
+                    <div class="course-tags"><span class="tag">ResNet</span><span class="tag">LayerNorm</span><span class="tag">Skip Conns</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PART 2 -->
+        <section style="margin-top: 40px;">
+            <div class="track-header">
+                <div class="track-title"><span>Part 2: Vector Space, Attention & Transformers</span><span class="track-badge">3 MODULES</span></div>
+            </div>
+            <div class="course-grid">
+                <a href="courses/04_embeddings_latent.html" class="course-card" data-lesson-id="04">
+                    <div class="course-card-top"><span class="course-number">COURSE 04</span><span class="course-duration">⏱️ 15 MIN</span></div>
+                    <h3>Vector Embeddings & Latent Space</h3>
+                    <p>Word2Vec, tokenization tokenizers (BPE), cosine similarity geometry, high-dimensional projections, and semantic vector arithmetic.</p>
+                    <div class="course-tags"><span class="tag">Cosine Math</span><span class="tag">BPE Tokenizer</span><span class="tag">Latent Space</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/05_attention_transformers.html" class="course-card" data-lesson-id="05">
+                    <div class="course-card-top"><span class="course-number">COURSE 05</span><span class="course-duration">⏱️ 22 MIN</span></div>
+                    <h3>Attention Mechanisms & Transformers</h3>
+                    <p>The Scaled Dot-Product Attention equation, Query-Key-Value (QKV) projections, Multi-Head Attention, and RoPE positional encodings.</p>
+                    <div class="course-tags"><span class="tag ai">🧠 Live Simulator</span><span class="tag">Self-Attention</span><span class="tag">QKV Math</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/06_llm_pretraining.html" class="course-card" data-lesson-id="06">
+                    <div class="course-card-top"><span class="course-number">COURSE 06</span><span class="course-duration">⏱️ 16 MIN</span></div>
+                    <h3>LLM Pretraining, Perplexity & Scaling</h3>
+                    <p>Causal autoregressive masking, Next-Token Prediction loss, Perplexity metrics, compute optimal Chinchilla scaling laws, and dataset curation.</p>
+                    <div class="course-tags"><span class="tag">Perplexity</span><span class="tag">Cross-Entropy</span><span class="tag">Chinchilla</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PART 3 -->
+        <section style="margin-top: 40px;">
+            <div class="track-header">
+                <div class="track-title"><span>Part 3: Adaptation, RAG & Prompt Engineering</span><span class="track-badge">3 MODULES</span></div>
+            </div>
+            <div class="course-grid">
+                <a href="courses/07_finetuning_lora.html" class="course-card" data-lesson-id="07">
+                    <div class="course-card-top"><span class="course-number">COURSE 07</span><span class="course-duration">⏱️ 20 MIN</span></div>
+                    <h3>Fine-Tuning, LoRA & PEFT Adapters</h3>
+                    <p>Low-Rank Adaptation math (W = W0 + B*A), 4-bit Quantization (QLoRA NF4), Direct Preference Optimization (DPO), and RLHF.</p>
+                    <div class="course-tags"><span class="tag">LoRA PEFT</span><span class="tag">QLoRA</span><span class="tag">DPO Alignment</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/08_rag_vector_dbs.html" class="course-card" data-lesson-id="08">
+                    <div class="course-card-top"><span class="course-number">COURSE 08</span><span class="course-duration">⏱️ 18 MIN</span></div>
+                    <h3>RAG Architecture & Vector Indexing</h3>
+                    <p>Hierarchical chunking, HNSW vector indexing algorithms, Cross-Encoder re-ranking, and hybrid dense/sparse keyword search.</p>
+                    <div class="course-tags"><span class="tag">HNSW Vector</span><span class="tag">RAG Re-ranking</span><span class="tag">Chroma</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/09_prompt_engineering.html" class="course-card" data-lesson-id="09">
+                    <div class="course-card-top"><span class="course-number">COURSE 09</span><span class="course-duration">⏱️ 15 MIN</span></div>
+                    <h3>Prompt Engineering & Chain-of-Thought</h3>
+                    <p>Zero-Shot, Few-Shot exemplars, Chain-of-Thought (CoT), Tree-of-Thought search, system prompt sandboxing, and structured JSON generation.</p>
+                    <div class="course-tags"><span class="tag">Chain-of-Thought</span><span class="tag">Structured JSON</span><span class="tag">Few-Shot</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- PART 4 -->
+        <section style="margin-top: 40px;">
+            <div class="track-header">
+                <div class="track-title"><span>Part 4: Autonomous Agents & Production AI</span><span class="track-badge">3 MODULES</span></div>
+            </div>
+            <div class="course-grid">
+                <a href="courses/10_agentic_loops.html" class="course-card" data-lesson-id="10">
+                    <div class="course-card-top"><span class="course-number">COURSE 10</span><span class="course-duration">⏱️ 24 MIN</span></div>
+                    <h3>Autonomous Agent Loops (ReAct)</h3>
+                    <p>The Reason + Act loop, tool-calling execution, reflection / self-correction loops, and stateful memory management.</p>
+                    <div class="course-tags"><span class="tag ai">🧠 Live Agent Simulator</span><span class="tag">ReAct Loop</span><span class="tag">Tool Calling</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/11_multi_agent_frameworks.html" class="course-card" data-lesson-id="11">
+                    <div class="course-card-top"><span class="course-number">COURSE 11</span><span class="course-duration">⏱️ 22 MIN</span></div>
+                    <h3>Multi-Agent Swarms & Hierarchies</h3>
+                    <p>Hierarchical supervisor-worker agent topologies, consensus voting mechanisms, LangGraph state machines, and human-in-the-loop controls.</p>
+                    <div class="course-tags"><span class="tag">LangGraph</span><span class="tag">Agent Swarms</span><span class="tag">Supervisor Pattern</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+                <a href="courses/12_production_ai_deployment.html" class="course-card" data-lesson-id="12">
+                    <div class="course-card-top"><span class="course-number">COURSE 12</span><span class="course-duration">⏱️ 20 MIN</span></div>
+                    <h3>Production LLM Deployment & KV Cache</h3>
+                    <p>High-throughput inference with vLLM, PagedAttention memory management, TensorRT-LLM, continuous batching, and cost optimization.</p>
+                    <div class="course-tags"><span class="tag">vLLM</span><span class="tag">PagedAttention</span><span class="tag">KV Cache</span></div>
+                    <div class="course-footer"><span>Start Lesson →</span></div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    
+    <footer>
+        <p>&copy; 2026 DarkAIs AI Academy. Created by <a href="https://karidasd.github.io/" target="_blank" style="color:var(--accent); text-decoration:underline;">Dimitris Karydas</a> • <a href="https://github.com/karidasd/ai-academy" target="_blank" style="color:#FFB800;">⭐ Star on GitHub</a></p>
+    </footer>
+    <script src="js/academy.js"></script>
+</body>
+</html>
